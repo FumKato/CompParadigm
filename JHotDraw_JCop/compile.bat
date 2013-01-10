@@ -1,0 +1,1 @@
+jcopc -sourcepath src -d . CH.ifa.draw.applet.DrawApplet > log.txt

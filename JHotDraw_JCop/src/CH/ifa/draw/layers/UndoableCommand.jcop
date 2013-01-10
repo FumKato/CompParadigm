@@ -1,0 +1,39 @@
+package CH.ifa.draw.layers;
+
+/**
+ * @author Wolfram Kaiser
+ * @version <$CURRENT_VERSION$>
+ */
+public layer UndoableCommand {
+
+	public void CH.ifa.draw.standard.AbstractUndoableCommand+.execute() {
+		hasSelectionChanged = false;
+		view().addFigureSelectionListener(this);
+
+		proceed();
+
+		Undoable undoableCommand = this.getUndoActivity();
+		if ((undoableCommand != null) && (undoableCommand.isUndoable())) {
+			getDrawingEditor().getUndoManager().pushUndo(undoableCommand);
+			getDrawingEditor().getUndoManager().clearRedos();
+		}
+		
+		if (!hasSelectionChanged || (getDrawingEditor().getUndoManager().getUndoSize() == 1)) {
+			getDrawingEditor().figureSelectionChanged(view());
+		}
+
+		view().addFigureSelectionListener(this);
+	}
+	
+	/*public void CH.ifa.draw.standard.AbstractUndoableCommand+.isExecutable() {
+		return proceed();
+	}*/
+	
+	/*public String name() {
+		return proceed();
+	}*/
+
+	/*public DrawingEditor getDrawingEditor() {
+		return proceed();
+	}*/
+}

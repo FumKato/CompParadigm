@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+	<pattern name="Factory Method">
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.framework.DrawingView" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.DrawingView::getFigureSelection():CH.ifa.draw.framework.FigureSelection" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.DrawingView::insertFigures(CH.ifa.draw.framework.FigureEnumeration, int, int, boolean):CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.DrawingView::selectionElements():CH.ifa.draw.framework.FigureEnumeration" />
+		</instance>
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.framework.Figure" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.Figure::figures():CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.Figure::decompose():CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.Figure::connectorAt(int, int):CH.ifa.draw.framework.Connector" />
+		</instance>
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.framework.Handle" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.Handle::getUndoActivity():CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.framework.Tool" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.framework.Tool::getUndoActivity():CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.standard.ChangeConnectionHandle" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.standard.ChangeConnectionHandle::createUndoActivity(CH.ifa.draw.framework.DrawingView):CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.util.Command" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.util.Command::getUndoActivity():CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Creator" element="CH.ifa.draw.util.Undoable" />
+			<role name="FactoryMethod()" element="CH.ifa.draw.util.Undoable::getAffectedFigures():CH.ifa.draw.framework.FigureEnumeration" />
+		</instance>
+	</pattern>
+	<pattern name="Prototype">
+		<instance>
+			<role name="Client" element="CH.ifa.draw.contrib.GraphicalCompositeFigure" />
+			<role name="Prototype" element="CH.ifa.draw.framework.Figure" />
+		</instance>
+		<instance>
+			<role name="Client" element="CH.ifa.draw.contrib.GraphicalCompositeFigure" />
+			<role name="Prototype" element="CH.ifa.draw.standard.AbstractFigure" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::clone():java.lang.Object" />
+		</instance>
+		<instance>
+			<role name="Client" element="CH.ifa.draw.standard.ConnectionHandle" />
+			<role name="Prototype" element="CH.ifa.draw.framework.Figure" />
+			<role name="Operation()" element="CH.ifa.draw.standard.ConnectionHandle::createConnection():CH.ifa.draw.framework.ConnectionFigure" />
+		</instance>
+		<instance>
+			<role name="Prototype" element="CH.ifa.draw.framework.Figure" />
+			<role name="Client" element="CH.ifa.draw.standard.ConnectionTool" />
+			<role name="Operation()" element="CH.ifa.draw.standard.ConnectionTool::createConnection():CH.ifa.draw.framework.ConnectionFigure" />
+		</instance>
+		<instance>
+			<role name="Prototype" element="CH.ifa.draw.framework.Figure" />
+			<role name="Client" element="CH.ifa.draw.standard.CreationTool" />
+			<role name="Operation()" element="CH.ifa.draw.standard.CreationTool::createFigure():CH.ifa.draw.framework.Figure" />
+		</instance>
+	</pattern>
+	<pattern name="Singleton">
+		<instance>
+			<role name="Singleton" element="CH.ifa.draw.standard.AlignCommand$Alignment" />
+			<role name="uniqueInstance" element="public static CH.ifa.draw.standard.AlignCommand$Alignment LEFTS" />
+			<role name="uniqueInstance" element="public static CH.ifa.draw.standard.AlignCommand$Alignment CENTERS" />
+			<role name="uniqueInstance" element="public static CH.ifa.draw.standard.AlignCommand$Alignment RIGHTS" />
+			<role name="uniqueInstance" element="public static CH.ifa.draw.standard.AlignCommand$Alignment TOPS" />
+			<role name="uniqueInstance" element="public static CH.ifa.draw.standard.AlignCommand$Alignment MIDDLES" />
+			<role name="uniqueInstance" element="public static CH.ifa.draw.standard.AlignCommand$Alignment BOTTOMS" />
+		</instance>
+		<instance>
+			<role name="Singleton" element="CH.ifa.draw.standard.FigureEnumerator" />
+			<role name="uniqueInstance" element="private static CH.ifa.draw.standard.FigureEnumerator singletonEmptyEnumerator" />
+		</instance>
+		<instance>
+			<role name="Singleton" element="CH.ifa.draw.util.Clipboard" />
+			<role name="uniqueInstance" element="static CH.ifa.draw.util.Clipboard fgClipboard" />
+		</instance>
+		<instance>
+			<role name="Singleton" element="CH.ifa.draw.util.Iconkit" />
+			<role name="uniqueInstance" element="private static CH.ifa.draw.util.Iconkit fgIconkit" />
+		</instance>
+	</pattern>
+	<pattern name="(Object)Adapter-Command">
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.FigureChangeListener" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.AbstractFigure" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractFigure::release():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractFigure::invalidate():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractFigure::changed():void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.DrawingEditor" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.AbstractTool" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::isActive():boolean" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.AbstractCommand$EventDispatcher" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.AbstractCommand" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractCommand::addCommandListener(CH.ifa.draw.util.CommandListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractCommand::removeCommandListener(CH.ifa.draw.util.CommandListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractCommand::viewSelectionChanged(CH.ifa.draw.framework.DrawingView, CH.ifa.draw.framework.DrawingView):void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.AbstractTool" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::activate():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::deactivate():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::setUsable(boolean):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::setEnabled(boolean):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::addToolListener(CH.ifa.draw.framework.ToolListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractTool::removeToolListener(CH.ifa.draw.framework.ToolListener):void" />
+		</instance>
+		<instance>
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.contrib.GraphicalCompositeFigure" />
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.contrib.Layouter" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::layout():void" />
+		</instance>
+		<instance>
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.figures.TextFigure" />
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.OffsetLocator" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.figures.TextFigure::connect(CH.ifa.draw.framework.Figure):void" />
+		</instance>
+		<instance>
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.util.UndoableTool" />
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::addToolListener(CH.ifa.draw.framework.ToolListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::removeToolListener(CH.ifa.draw.framework.ToolListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::toolUsable(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::toolUnusable(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::toolActivated(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::toolDeactivated(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::toolEnabled(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableTool::toolDisabled(java.util.EventObject):void" />
+		</instance>
+		<instance>
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.util.UndoableCommand" />
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.AbstractCommand$EventDispatcher" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableCommand::addCommandListener(CH.ifa.draw.util.CommandListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableCommand::removeCommandListener(CH.ifa.draw.util.CommandListener):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableCommand::commandExecuted(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableCommand::commandExecutable(java.util.EventObject):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableCommand::commandNotExecutable(java.util.EventObject):void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.Connector" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.figures.LineConnection" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.figures.LineConnection::startFigure():CH.ifa.draw.framework.Figure" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.figures.LineConnection::endFigure():CH.ifa.draw.framework.Figure" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.figures.LineConnection::updateConnection():void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.Figure" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.AbstractConnector" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractConnector::displayBox():java.awt.Rectangle" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.AbstractConnector::containsPoint(int, int):boolean" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.DrawingEditor" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::tool():CH.ifa.draw.framework.Tool" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.Drawing" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::setDrawing(CH.ifa.draw.framework.Drawing):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::add(CH.ifa.draw.framework.Figure):CH.ifa.draw.framework.Figure" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::remove(CH.ifa.draw.framework.Figure):CH.ifa.draw.framework.Figure" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::insertFigures(CH.ifa.draw.framework.FigureEnumeration, int, int, boolean):CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::getConnectionFigures(CH.ifa.draw.framework.Figure):java.util.Vector" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::selectionZOrdered():java.util.Vector" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::addToSelection(CH.ifa.draw.framework.Figure):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::checkDamage():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::draw(java.awt.Graphics, CH.ifa.draw.framework.FigureEnumeration):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::drawDrawing(java.awt.Graphics):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::freezeView():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.StandardDrawingView::unfreezeView():void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.ToolButton" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.applet.DrawApplet" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.applet.DrawApplet::toolDone():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.applet.DrawApplet::paletteUserSelected(CH.ifa.draw.util.PaletteButton):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.applet.DrawApplet::paletteUserOver(CH.ifa.draw.util.PaletteButton, boolean):void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.standard.ToolButton" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.application.DrawApplication" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.application.DrawApplication::toolDone():void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.application.DrawApplication::paletteUserSelected(CH.ifa.draw.util.PaletteButton):void" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.application.DrawApplication::paletteUserOver(CH.ifa.draw.util.PaletteButton, boolean):void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.Locator" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.contrib.PolygonHandle" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.contrib.PolygonHandle::locate():java.awt.Point" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.Locator" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.LocatorHandle" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.LocatorHandle::locate():java.awt.Point" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.framework.DrawingView" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.util.UndoableHandle" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.UndoableHandle::invokeEnd(int, int, int, int, CH.ifa.draw.framework.DrawingView):void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.util.VersionRequester" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.util.StandardVersionControlStrategy" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.util.StandardVersionControlStrategy::assertCompatibleVersion():void" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.contrib.Layoutable" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.contrib.StandardLayouter" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.contrib.StandardLayouter::calculateLayout(java.awt.Point, java.awt.Point):java.awt.Rectangle" />
+		</instance>
+		<instance>
+			<role name="Adaptee/Receiver" element="CH.ifa.draw.util.ReverseVectorEnumerator" />
+			<role name="Adapter/ConcreteCommand" element="CH.ifa.draw.standard.ReverseFigureEnumerator" />
+			<role name="Request()/Execute()" element="CH.ifa.draw.standard.ReverseFigureEnumerator::nextFigure():CH.ifa.draw.framework.Figure" />
+		</instance>
+	</pattern>
+	<pattern name="Composite">
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Figure" />
+			<role name="Composite" element="CH.ifa.draw.standard.CompositeFigure" />
+			<role name="Operation()" element="CH.ifa.draw.standard.CompositeFigure::draw(java.awt.Graphics):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.CompositeFigure::findFigureInside(int, int):CH.ifa.draw.framework.Figure" />
+			<role name="Operation()" element="CH.ifa.draw.standard.CompositeFigure::includes(CH.ifa.draw.framework.Figure):boolean" />
+			<role name="Operation()" element="CH.ifa.draw.standard.CompositeFigure::release():void" />
+		</instance>
+	</pattern>
+	<pattern name="Decorator">
+		<instance>
+			<role name="Component" element="CH.ifa.draw.util.Command" />
+			<role name="Decorator" element="CH.ifa.draw.util.UndoableCommand" ></role>
+			<role name="component" element="private CH.ifa.draw.util.Command myWrappedCommand" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableCommand::execute():void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableCommand::isExecutable():boolean" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableCommand::name():java.lang.String" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableCommand::getDrawingEditor():CH.ifa.draw.framework.DrawingEditor" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Tool" />
+			<role name="Decorator" element="CH.ifa.draw.contrib.DragNDropTool" />
+			<role name="component" element="protected CH.ifa.draw.framework.Tool fChild" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.DragNDropTool::mouseUp(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.DragNDropTool::mouseDown(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.DragNDropTool::mouseDrag(java.awt.event.MouseEvent, int, int):void" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Tool" />
+			<role name="Decorator" element="CH.ifa.draw.standard.SelectionTool" />
+			<role name="component" element="private CH.ifa.draw.framework.Tool fChild" />
+			<role name="Operation()" element="CH.ifa.draw.standard.SelectionTool::mouseDown(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.SelectionTool::mouseDrag(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.SelectionTool::mouseUp(java.awt.event.MouseEvent, int, int):void" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Tool" />
+			<role name="Decorator" element="CH.ifa.draw.util.UndoableTool" />
+			<role name="component" element="private CH.ifa.draw.framework.Tool myWrappedTool" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::activate():void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::deactivate():void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::mouseDown(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::mouseDrag(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::mouseUp(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::mouseMove(java.awt.event.MouseEvent, int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::keyDown(java.awt.event.KeyEvent, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::isUsable():boolean" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::isEnabled():boolean" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::setUsable(boolean):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::setEnabled(boolean):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableTool::editor():CH.ifa.draw.framework.DrawingEditor" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Locator" />
+			<role name="Decorator" element="CH.ifa.draw.standard.OffsetLocator" />
+			<role name="component" element="private CH.ifa.draw.framework.Locator fBase" />
+			<role name="Operation()" element="CH.ifa.draw.standard.OffsetLocator::locate(CH.ifa.draw.framework.Figure):java.awt.Point" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Figure" />
+			<role name="Decorator" element="CH.ifa.draw.standard.DecoratorFigure" />
+			<role name="component" element="private CH.ifa.draw.framework.Figure fComponent" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::connectionInsets():java.awt.Insets" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::canConnect():boolean" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::containsPoint(int, int):boolean" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::displayBox():java.awt.Rectangle" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::basicDisplayBox(java.awt.Point, java.awt.Point):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::draw(java.awt.Graphics):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::findFigureInside(int, int):CH.ifa.draw.framework.Figure" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::handles():java.util.Vector" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::includes(CH.ifa.draw.framework.Figure):boolean" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::moveBy(int, int):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::release():void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::figures():CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::decompose():CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::setAttribute(java.lang.String, java.lang.Object):void" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::getAttribute(java.lang.String):java.lang.Object" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::connectedTextLocator(CH.ifa.draw.framework.Figure):CH.ifa.draw.framework.Locator" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::connectorAt(int, int):CH.ifa.draw.framework.Connector" />
+			<role name="Operation()" element="CH.ifa.draw.standard.DecoratorFigure::connectorVisibility(boolean):void" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Figure" />
+			<role name="Decorator" element="CH.ifa.draw.contrib.GraphicalCompositeFigure" />
+			<role name="component" element="private CH.ifa.draw.framework.Figure myPresentationFigure" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::displayBox():java.awt.Rectangle" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::basicDisplayBox(java.awt.Point, java.awt.Point):void" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::draw(java.awt.Graphics):void" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::handles():java.util.Vector" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::getAttribute(java.lang.String):java.lang.Object" />
+			<role name="Operation()" element="CH.ifa.draw.contrib.GraphicalCompositeFigure::setAttribute(java.lang.String, java.lang.Object):void" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.framework.Handle" />
+			<role name="Decorator" element="CH.ifa.draw.util.UndoableHandle" />
+			<role name="component" element="private CH.ifa.draw.framework.Handle myWrappedHandle" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::locate():java.awt.Point" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::invokeStart(int, int, CH.ifa.draw.framework.Drawing):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::invokeStart(int, int, CH.ifa.draw.framework.DrawingView):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::invokeStep(int, int, CH.ifa.draw.framework.Drawing):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::invokeStep(int, int, int, int, CH.ifa.draw.framework.DrawingView):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::invokeEnd(int, int, int, int, CH.ifa.draw.framework.DrawingView):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::invokeEnd(int, int, CH.ifa.draw.framework.Drawing):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::owner():CH.ifa.draw.framework.Figure" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::displayBox():java.awt.Rectangle" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::containsPoint(int, int):boolean" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoableHandle::draw(java.awt.Graphics):void" />
+		</instance>
+		<instance>
+			<role name="Component" element="CH.ifa.draw.util.Undoable" />
+			<role name="Decorator" element="CH.ifa.draw.util.UndoRedoActivity" />
+			<role name="component" element="private CH.ifa.draw.util.Undoable myReversedActivity" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoRedoActivity::setAffectedFigures(CH.ifa.draw.framework.FigureEnumeration):void" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoRedoActivity::getAffectedFigures():CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoRedoActivity::getAffectedFiguresCount():int" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoRedoActivity::getDrawingView():CH.ifa.draw.framework.DrawingView" />
+			<role name="Operation()" element="CH.ifa.draw.util.UndoRedoActivity::release():void" />
+		</instance>
+	</pattern>
+	<pattern name="Observer">
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.framework.FigureSelectionListener" />
+			<role name="Subject" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::fireSelectionChanged():void" />
+		</instance>
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.framework.ToolListener" />
+			<role name="Subject" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher::fireToolUsableEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher::fireToolUnusableEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher::fireToolActivatedEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher::fireToolDeactivatedEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher::fireToolEnabledEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractTool$EventDispatcher::fireToolDisabledEvent():void" />
+		</instance>
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.util.CommandListener" />
+			<role name="Subject" element="CH.ifa.draw.standard.AbstractCommand$EventDispatcher" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractCommand$EventDispatcher::fireCommandExecutedEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractCommand$EventDispatcher::fireCommandExecutableEvent():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.AbstractCommand$EventDispatcher::fireCommandNotExecutableEvent():void" />
+		</instance>
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.framework.DrawingChangeListener" />
+			<role name="Subject" element="CH.ifa.draw.standard.StandardDrawing" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawing::figureInvalidated(CH.ifa.draw.framework.FigureChangeEvent):void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawing::figureRequestUpdate(CH.ifa.draw.framework.FigureChangeEvent):void" />
+		</instance>
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.framework.Painter" />
+			<role name="Subject" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::drawPainters(java.awt.Graphics, java.util.Vector):void" />
+		</instance>
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.framework.Figure" />
+			<role name="Subject" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::figureExists(CH.ifa.draw.framework.Figure, CH.ifa.draw.framework.FigureEnumeration):boolean" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::insertFigures(CH.ifa.draw.framework.FigureEnumeration, int, int, boolean):CH.ifa.draw.framework.FigureEnumeration" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::getConnectionFigures(CH.ifa.draw.framework.Figure):java.util.Vector" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::clearSelection():void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::selectionHandles():java.util.Enumeration" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::moveSelection(int, int):void" />
+			<role name="Notify()" element="CH.ifa.draw.standard.StandardDrawingView::checkMinimumSize():void" />
+		</instance>
+		<instance>
+			<role name="Observer" element="CH.ifa.draw.util.StorageFormat" />
+			<role name="Subject" element="CH.ifa.draw.util.StorageFormatManager" />
+			<role name="Notify()" element="CH.ifa.draw.util.StorageFormatManager::registerFileFilters(javax.swing.JFileChooser):void" />
+			<role name="Notify()" element="CH.ifa.draw.util.StorageFormatManager::findStorageFormat(javax.swing.filechooser.FileFilter):CH.ifa.draw.util.StorageFormat" />
+		</instance>
+	</pattern>
+	<pattern name="State-Strategy">
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.AbstractFigure" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.FigureChangeListener" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.AbstractCommand" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingEditor" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.AbstractTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingEditor" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.GraphNode" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ChangeConnectionHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ConnectionHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.applet.DrawApplet" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Tool" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.application.DrawApplication" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Tool" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableCommand" />
+			<role name="State/Strategy" element="CH.ifa.draw.util.Command" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableCommand" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableCommand" />
+			<role name="State/Strategy" element="CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.DragNDropTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Tool" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.DragNDropTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.SelectionTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Tool" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.SelectionTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Handle" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.util.Command" />
+			<role name="Context" element="CH.ifa.draw.util.CommandButton" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+			<role name="Context" element="CH.ifa.draw.samples.javadraw.URLTool" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+			<role name="Context" element="CH.ifa.draw.standard.ConnectionTool" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+			<role name="Context" element="CH.ifa.draw.standard.CreationTool" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+			<role name="Context" element="CH.ifa.draw.standard.DragTracker" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ChangeConnectionHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.ConnectionFigure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ConnectionHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.ConnectionFigure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.GraphicalCompositeFigure" />
+			<role name="State/Strategy" element="CH.ifa.draw.contrib.Layouter" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.AbstractConnector" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Figure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.figures.LineConnection" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Connector" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.util.Undoable" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Tool" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+			<role name="Context" element="CH.ifa.draw.applet.DrawApplet" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+			<role name="Context" element="CH.ifa.draw.application.DrawApplication" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.MDI_InternalFrame" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.samples.javadraw.Animator" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.DragNDropTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Drawing" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.SelectionTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Drawing" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Drawing" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Painter" />
+			<role name="Context" element="CH.ifa.draw.standard.StandardDrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ConnectionTool$UndoActivity" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.ConnectionFigure" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.PaletteButton" />
+			<role name="State/Strategy" element="CH.ifa.draw.util.PaletteListener" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.PolygonHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Locator" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.LocatorHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Locator" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.applet.DrawApplet" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Drawing" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ConnectionTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.ConnectionFigure" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.util.StorageFormat" />
+			<role name="Context" element="CH.ifa.draw.util.StorageFormatManager" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.figures.TextTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.standard.TextHolder" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingView" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.HandleTracker" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Handle" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.util.VersionRequester" />
+			<role name="Context" element="CH.ifa.draw.util.StandardVersionControlStrategy" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.figures.PolyLineFigure" />
+			<role name="State/Strategy" element="CH.ifa.draw.figures.LineDecoration" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ChangeConnectionHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Connector" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.contrib.StandardLayouter" />
+			<role name="State/Strategy" element="CH.ifa.draw.contrib.Layoutable" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.StandardDrawingView" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.PointConstrainer" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.ConnectionTool" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Connector" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.util.UndoableHandle" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.DrawingEditor" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.LocatorConnector" />
+			<role name="State/Strategy" element="CH.ifa.draw.framework.Locator" />
+		</instance>
+		<instance>
+			<role name="Context" element="CH.ifa.draw.standard.AlignCommand$UndoActivity" />
+			<role name="State/Strategy" element="CH.ifa.draw.standard.AlignCommand$Alignment" />
+		</instance>
+		<instance>
+			<role name="State/Strategy" element="CH.ifa.draw.util.Animatable" />
+			<role name="Context" element="CH.ifa.draw.samples.javadraw.Animator" />
+		</instance>
+	</pattern>
+	<pattern name="Template Method">
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.contrib.AutoscrollHelper" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.contrib.AutoscrollHelper::autoscroll(java.awt.Point):void" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.contrib.AutoscrollHelper::getAutoscrollInsets():java.awt.Insets" />
+		</instance>
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.figures.AbstractLineDecoration" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.figures.AbstractLineDecoration::draw(java.awt.Graphics, int, int, int, int):void" />
+		</instance>
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.standard.AbstractFigure" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractFigure::moveBy(int, int):void" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractFigure::displayBox(java.awt.Point, java.awt.Point):void" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractFigure::size():java.awt.Dimension" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractFigure::containsPoint(int, int):boolean" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractFigure::invalidate():void" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractFigure::center():java.awt.Point" />
+		</instance>
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.standard.AbstractHandle" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.AbstractHandle::displayBox():java.awt.Rectangle" />
+		</instance>
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.standard.ActionTool" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.ActionTool::mouseDown(java.awt.event.MouseEvent, int, int):void" />
+		</instance>
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.standard.ChangeConnectionHandle$UndoActivity" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.ChangeConnectionHandle$UndoActivity::swapConnectors():void" />
+		</instance>
+		<instance>
+			<role name="AbstractClass" element="CH.ifa.draw.standard.ChangeConnectionHandle" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.ChangeConnectionHandle::source():CH.ifa.draw.framework.Connector" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.ChangeConnectionHandle::invokeStart(int, int, CH.ifa.draw.framework.DrawingView):void" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.ChangeConnectionHandle::invokeStep(int, int, int, int, CH.ifa.draw.framework.DrawingView):void" />
+			<role name="TemplateMethod()" element="CH.ifa.draw.standard.ChangeConnectionHandle::invokeEnd(int, int, int, int, CH.ifa.draw.framework.DrawingView):void" />
+		</instance>
+	</pattern>
+	<pattern name="Visitor" />
+	<pattern name="Proxy" />
+	<pattern name="Proxy2" />
+</system>
+

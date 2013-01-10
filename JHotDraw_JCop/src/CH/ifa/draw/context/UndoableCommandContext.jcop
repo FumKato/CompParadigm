@@ -1,0 +1,8 @@
+package CH.ifa.draw.context;
+
+import CH.ifa.draw.standard.UndoableCommand;
+
+public contextclass UndoableCommandContext {
+	on(* CH.ifa.draw.standard.AbstractUndoableCommand+.execute()):
+		with(new UndoableCommand());
+}

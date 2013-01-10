@@ -1,0 +1,48 @@
+package CH.ifa.draw.layers;
+
+public layer HandleTracker {
+	
+	after public void CH.ifa.draw.contrib.DragNDropTool.mouseDown(MouseEvent e, int x, int y) {
+		fAnchorHandle = view().findHandle(e.getX(), e.getY());
+		super.mouseDown(e, x, y);
+		fAnchorHandle.invokeStart(x, y, view());
+	}
+	
+	public void CH.ifa.draw.contrib.DragNDropTool.mouseDrag(MouseEvent e, int x, int y) {
+		super.mouseDrag(e, x, y);
+		fAnchorHandle.invokeStep(x, y, fAnchorX, fAnchorY, view());
+	}
+	
+	after public void CH.ifa.draw.contrib.DragNDropTool.mouseUp(MouseEvent e, int x, int y) {
+		super.mouseUp(e, x, y);
+		fAnchorHandle.invokeEnd(x, y, fAnchorX, fAnchorY, view());
+		isHandleTracker = false;
+		fChildExistence = false;
+	}
+	
+	after public void CH.ifa.draw.standard.SelectionTool.mouseDown(MouseEvent e, int x, int y) {
+		fAnchorHandle = view().findHandle(e.getX(), e.getY());
+		super.mouseDown(e, x, y);
+		fAnchorHandle.invokeStart(x, y, view());
+		activate();
+	}
+	
+	public void CH.ifa.draw.contrib.standard.SelectionTool.mouseDrag(MouseEvent e, int x, int y) {
+		super.mouseDrag(e, x, y);
+		fAnchorHandle.invokeStep(x, y, fAnchorX, fAnchorY, view());
+	}
+	
+	after public void CH.ifa.draw.contrib.standard.SelectionTool.mouseUp(MouseEvent e, int x, int y) {
+		super.mouseUp(e, x, y);
+		fAnchorHandle.invokeEnd(x, y, fAnchorX, fAnchorY, view());
+		deactivate();
+		fChildExistence = false;
+	}
+	
+	public void CH.ifa.draw.standard.SelectionTool.activate() {
+	}
+	
+	public void CH.ifa.draw.standard.SelectionTool.deactivate() {
+		super.deactivate();
+	}
+}

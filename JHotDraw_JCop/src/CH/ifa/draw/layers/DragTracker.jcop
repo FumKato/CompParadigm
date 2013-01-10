@@ -1,0 +1,54 @@
+package CH.ifa.draw.layers;
+
+public class DragTracker {
+	after public void CH.ifa.draw.standard.SelectionTool.mouseDown(MouseEvent e, int x, int y) {
+		super.mouseDown(e, x, y);
+		fLastX = x;
+		fLastY = y;
+
+		if (e.isShiftDown()) {
+		   view().toggleSelection(fAnchorFigure);
+		   fAnchorFigure = null;
+		}
+		else if (!view().isFigureSelected(fAnchorFigure)) {
+			view().clearSelection();
+			view().addToSelection(fAnchorFigure);
+		}
+		activate();
+	}
+
+	public void CH.ifa.draw.standard.SelectionTool.mouseDrag(MouseEvent e, int x, int y) {
+		super.mouseDrag(e, x, y);
+		fMoved = (Math.abs(x - fAnchorX) > 4) || (Math.abs(y - fAnchorY) > 4);
+
+		if (fMoved) {
+			FigureEnumeration figures = getUndoActivity().getAffectedFigures();
+			while (figures.hasMoreElements()) {
+				figures.nextFigure().moveBy(x - fLastX, y - fLastY);
+			}
+		}
+		fLastX = x;
+		fLastY = y;
+	}
+
+	after public void CH.ifa.draw.standard.SelectionTool.mouseUp(MouseEvent e, int x, int y) {
+		super.mouseUp(e, x, y);
+		deactivate();
+		isDragTracker = false;
+		fChildExistence = false;
+	}
+	
+	public void CH.ifa.draw.standard.SelectionTool.activate() {
+		setUndoActivity(createUndoActivity());
+		getUndoActivity().setAffectedFigures(view().selectionElements());
+	}
+
+	public void CH.ifa.draw.standard.SelectionTool.deactivate() {
+		if (fMoved) {
+			((DragTracker.UndoActivity)getUndoActivity()).setBackupPoint(new Point(fLastX, fLastY));
+		}
+		else {
+			setUndoActivity(null);
+		}
+	}
+}

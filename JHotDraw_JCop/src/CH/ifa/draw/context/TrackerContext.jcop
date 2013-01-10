@@ -1,0 +1,49 @@
+package CH.ifa.draw.context;
+
+import CH.ifa.draw.layers.HandleTracker;
+import CH.ifa.draw.layers.SelectAreaTracker;
+import CH.ifa.draw.contrib.DragNDropTool;
+
+public contextclass TrackerContext {
+	private AbstractTracker tool;
+	
+	public TrackerContext(AbstractTracker tool) {
+		this.tool = tool;
+	}
+	
+	(on(void CH.ifa.draw.contrib.DragNDropTool.mouseDown(..)) ||
+	on(void CH.ifa.draw.contrib.DragNDropTool.mouseDrag(..)) ||
+	on(void CH.ifa.draw.contrib.DragNDropTool.mouseUp(..))) && 
+	when(tool.isHandleTracker):
+		with(new HandleTracker());
+	
+	(on(void CH.ifa.draw.contrib.DragNDropTool.mouseDown(..)) ||
+	on(void CH.ifa.draw.contrib.DragNDropTool.mouseDrag(..)) ||
+	on(void CH.ifa.draw.contrib.DragNDropTool.mouseUp(..))) && 
+	when(dragNdropToo.isSelectAreaTracker):
+		with(new SelectAreaTracker());
+	
+	(on(void CH.ifa.draw.contrib.SelectionTool.mouseDown(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.mouseDrag(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.mouseUp(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.activate()) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.deactivate(..))) && 
+	when(tool.isHandleTracker):
+		with(new HandleTracker());
+	
+	(on(void CH.ifa.draw.contrib.SelectionTool.mouseDown(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.mouseDrag(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.mouseUp(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.activate()) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.deactivate(..))) && 
+	when(tool.isDragTracker):
+		with(new DragTracker());
+	
+	(on(void CH.ifa.draw.contrib.SelectionTool.mouseDown(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.mouseDrag(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.mouseUp(..)) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.activate()) ||
+	on(void CH.ifa.draw.contrib.SelectionTool.deactivate(..))) && 
+	when(tool.isSelectAreaTracker):
+		with(new SelectAreaTracker());
+}

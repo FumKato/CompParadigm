@@ -1,0 +1,11 @@
+package CH.ifa.draw.context;
+
+import CH.ifa.draw.util.AbstractUndoableTool;
+import CH.ifa.draw.layers.UndoableTool;
+
+public contextclass UndoableToolContext {
+	
+	on(CH.ifa.draw.util.AbstractUndoableTool+.deacitvate(..)) :
+		with(new UndoableTool());
+	
+}

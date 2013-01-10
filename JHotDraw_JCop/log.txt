@@ -1,0 +1,4 @@
+B:\git\F_kato\JHotDraw_JCop\src\CH\ifa\draw\applet\DrawApplet.jcop:181:
+  WARNING: getFontList() in java.awt.Toolkit has been deprecated
+B:\git\F_kato\JHotDraw_JCop\src\CH\ifa\draw\applet\DrawApplet.jcop:599:
+  WARNING: stop() in java.lang.Thread has been deprecated

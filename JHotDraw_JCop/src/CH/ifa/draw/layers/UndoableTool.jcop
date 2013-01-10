@@ -1,0 +1,60 @@
+package CH.ifa.draw.layers;
+
+public layer UndoableTool {
+	
+	/*public void CH.ifa.draw.util.AbstractUndoableTool+.activate() {
+		proceed();
+	}*/
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.deactivate() {
+		proceed();
+		Undoable undoActivity = getWrappedTool().getUndoActivity();
+		if ((undoActivity != null) && (undoActivity.isUndoable())) {
+			editor().getUndoManager().pushUndo(undoActivity);
+			editor().getUndoManager().clearRedos();
+			// update menus
+			editor().figureSelectionChanged(view());
+		}
+	}
+
+	/*public void CH.ifa.draw.util.AbstractUndoableTool+.mouseDown(MouseEvent e, int x, int y) {
+		proceed(e, x, y);
+	}
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.mouseDrag(MouseEvent e, int x, int y) {
+		proceed(e, x, y);
+	}
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.mouseUp(MouseEvent e, int x, int y) {
+		proceed(e, x, y);
+	}
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.mouseMove(MouseEvent evt, int x, int y) {
+		proceed(evt, x, y);
+	}
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.keyDown(KeyEvent evt, int key) {
+		proceed(evt, key);
+	}
+
+	public boolean CH.ifa.draw.util.AbstractUndoableTool+.isUsable() {
+		return proceed();
+	}
+
+	public boolean CH.ifa.draw.util.AbstractUndoableTool+.isEnabled() {
+		return proceed();
+	}
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.setUsable(boolean newIsUsable) {
+		proceed(newIsUsable);
+	}
+
+	public void CH.ifa.draw.util.AbstractUndoableTool+.setEnabled(boolean newIsEnabled) {
+		proceed(newIsEnabled);
+	}
+	
+	public DrawingEditor CH.ifa.draw.util.AbstractUndoableTool+.editor() {
+		return proceed();
+	}*/
+
+}

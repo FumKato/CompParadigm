@@ -1,0 +1,40 @@
+package CH.ifa.draw.util;
+
+import CH.ifa.draw.framework.*;
+import CH.ifa.draw.standard.AbstractTool;
+import java.util.EventObject;
+
+public abstract class AbstractUndoableTool extends AbstractTool implements ToolListener{
+	
+	public boolean isActive() {
+		return editor().tool() == this;
+	}
+	
+	public AbstractUndoableTool(DrawingEditor newDrawingEditor) {
+		super(newDrawingEditor);
+	}
+	
+	public void toolUsable(EventObject toolEvent) {
+		getEventDispatcher().fireToolUsableEvent();
+	}
+
+	public void toolUnusable(EventObject toolEvent) {
+		getEventDispatcher().fireToolUnusableEvent();
+	}
+
+	public void toolActivated(EventObject toolEvent) {
+		getEventDispatcher().fireToolActivatedEvent();
+	}
+
+	public void toolDeactivated(EventObject toolEvent) {
+		getEventDispatcher().fireToolDeactivatedEvent();
+	}
+
+	public void toolEnabled(EventObject toolEvent) {
+		getEventDispatcher().fireToolEnabledEvent();
+	}
+
+	public void toolDisabled(EventObject toolEvent) {
+		getEventDispatcher().fireToolDisabledEvent();
+	}
+}
